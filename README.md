@@ -46,6 +46,43 @@ Claude Frontforge e um plugin de UX para o Claude Code. Ele guia o design de int
 
 ---
 
+## 🌍 Use with Other LLMs / Use com Outros LLMs
+
+**Claude Frontforge works with ANY LLM!** / **Funciona com QUALQUER LLM!**
+
+Beyond Claude Code, you can use Frontforge with:
+
+- 🟦 **GitHub Copilot** / **Codex**
+- 🟨 **Cursor AI**
+- 🟪 **Gemini CLI**
+- 🦙 **Ollama** (local LLMs)
+- 🔧 **Aider**
+- 🎨 **Continue** (VS Code)
+- And more! / E mais!
+
+### Quick Install for Other LLMs
+
+```bash
+# Interactive installer (detects your environment)
+npx degit thiagoedson/claude-frontforge/install.js
+node install.js
+
+# Or install directly for specific LLM:
+node install.js --llm copilot   # GitHub Copilot
+node install.js --llm cursor    # Cursor AI
+node install.js --llm aider     # Aider
+node install.js --llm gemini    # Gemini CLI
+```
+
+This will:
+1. ✅ Download all validation scripts to `./frontforge`
+2. ✅ Configure your LLM with design system rules
+3. ✅ Set up automatic validation
+
+📖 **Full guide**: [USE_WITH_OTHER_LLMS.md](USE_WITH_OTHER_LLMS.md)
+
+---
+
 ## Installation / Instalacao
 
 ### Plugin (Recommended) / Plugin (Recomendado)

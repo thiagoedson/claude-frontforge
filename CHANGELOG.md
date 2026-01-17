@@ -5,6 +5,32 @@ Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/),
 e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [Unreleased]
+
+### ✨ Adicionado
+
+#### 🌍 Suporte Universal para Outros LLMs
+- **Universal installer** (`install.js`) com detecção automática de ambiente
+- Guia completo em `USE_WITH_OTHER_LLMS.md` com instruções para:
+  - GitHub Copilot / Codex
+  - Cursor AI
+  - Gemini CLI
+  - Ollama (local LLMs)
+  - Aider
+  - Continue (VS Code)
+- Templates pré-configurados para cada LLM
+- Instalação com um comando: `node install.js`
+- Exemplo completo de `.cursorrules` em `reference/examples/`
+- Seção "Use with Other LLMs" no README.md
+- Bin script `frontforge-install` para uso via npx
+
+#### 📦 Melhorias de Distribuição
+- Scripts agora podem ser baixados individualmente
+- Funcionam standalone (sem dependência do Claude Code)
+- Documentação multilíngue expandida
+
+---
+
 ## [2026.1.16.1543] - 2026-01-17
 
 ### ✨ Adicionado

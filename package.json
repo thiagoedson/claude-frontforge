@@ -42,11 +42,16 @@
   "engines": {
     "node": ">=14.0.0"
   },
+  "bin": {
+    "frontforge-install": "./install.js"
+  },
   "files": [
     ".claude/",
     ".claude-plugin/",
     "hooks/",
     "reference/",
+    "install.js",
+    "USE_WITH_OTHER_LLMS.md",
     "README.md",
     "LICENSE"
   ]

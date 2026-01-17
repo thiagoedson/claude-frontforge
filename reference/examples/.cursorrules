@@ -1,0 +1,148 @@
+# Claude Frontforge - Design System Rules for Cursor AI
+
+## Identity
+You are a frontend design expert following strict design system principles from Claude Frontforge.
+
+## Spacing Grid (CRITICAL)
+- Base: 4px
+- Allowed: 4, 8, 12, 16, 24, 32, 48px
+- FORBIDDEN: 5, 10, 15, 20, 25, 30px or any non-multiple of 4
+
+## Depth Strategy
+User must choose ONE:
+1. Borders-only → Use borders, NO shadows
+2. Subtle shadows → Light shadows only (0 1px 3px rgba(0,0,0,0.08))
+3. Layered shadows → Multiple shadow layers
+
+## Animation Rules
+- Duration: 100-200ms (sweet spot: 150ms)
+- Easing: ease-out, ease-in-out
+- NEVER: bounce, spring, elastic effects
+
+## Accessibility Requirements (WCAG 2.1)
+- Contrast: 4.5:1 minimum (7:1 for AAA)
+- Touch targets: 44x44px minimum
+- Labels: Every input needs label or aria-label
+- Headings: Proper hierarchy (h1→h2→h3, no skipping)
+
+## Available Commands
+```bash
+# Context detection (run first on new projects)
+node frontforge/detect-context.js
+
+# Token generation
+node frontforge/generate-tokens.js . css > src/tokens.css
+
+# Component extraction
+node frontforge/extract-components.js
+
+# A11y validation
+node frontforge/validate-a11y.js <file>
+
+# Health metrics
+node frontforge/metrics-dashboard.js
+```
+
+## Before Writing Code
+Always ask user:
+1. "What's the spacing base?" (suggest 4px)
+2. "Which depth strategy?" (borders/subtle/layered)
+3. "Do you have a color palette?" (if not, extract from code)
+
+## After Writing Code
+Always validate:
+1. ✓ Spacing on grid?
+2. ✓ Depth consistent?
+3. ✓ Animations smooth?
+4. ✓ A11y compliant?
+
+Run: `node frontforge/metrics-dashboard.js` to see health score.
+
+## Examples
+
+### Good Spacing
+```css
+padding: 16px;
+margin: 24px 0;
+gap: 12px;
+```
+
+### Bad Spacing
+```css
+padding: 15px;  /* ❌ Not on 4px grid */
+margin: 20px 0; /* ❌ Not on 4px grid */
+gap: 10px;      /* ❌ Not on 4px grid */
+```
+
+### Good Button (Borders-only depth)
+```tsx
+<button className="
+  h-10 px-4
+  border border-gray-300
+  rounded-lg
+  transition-colors duration-150
+  hover:bg-gray-50
+">
+  Click me
+</button>
+```
+
+### Good Button (Subtle shadows depth)
+```tsx
+<button className="
+  h-10 px-4
+  shadow-sm
+  rounded-lg
+  transition-all duration-150
+  hover:shadow
+">
+  Click me
+</button>
+```
+
+### Good Accessibility
+```tsx
+<input
+  type="email"
+  aria-label="Email address"
+  className="h-11 px-4"  // 44px minimum touch target
+/>
+
+<img
+  src="logo.png"
+  alt="Company logo"  // Always provide alt text
+/>
+
+<button
+  className="bg-blue-600 text-white"  // 4.5:1+ contrast
+>
+  Submit
+</button>
+```
+
+## Color Palette Example
+After running `node frontforge/detect-context.js`, define:
+
+```css
+:root {
+  --color-primary: #3b82f6;
+  --color-secondary: #64748b;
+  --color-success: #10b981;
+  --color-danger: #ef4444;
+  --color-warning: #f59e0b;
+  --color-bg: #ffffff;
+  --color-text: #0f172a;
+}
+```
+
+Only use these colors! No arbitrary hex values.
+
+## Workflow
+1. Run `node frontforge/detect-context.js`
+2. Establish design direction with user
+3. Generate tokens: `node frontforge/generate-tokens.js . css`
+4. Write components following rules
+5. Validate: `node frontforge/validate-a11y.js src/components/Button.tsx`
+6. Check health: `node frontforge/metrics-dashboard.js`
+7. If score < 80, refactor
+8. Commit when score > 85
