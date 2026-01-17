@@ -1,0 +1,53 @@
+{
+  "name": "claude-frontforge",
+  "version": "2026.1.16.1543",
+  "description": "UX engineering skill for Claude Code. Build interfaces with craft, memory, and enforcement.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "verify": "node verify-installation.js",
+    "detect-context": "node hooks/detect-context.js",
+    "generate-tokens": "node hooks/generate-tokens.js",
+    "extract-components": "node hooks/extract-components.js",
+    "validate-a11y": "node hooks/validate-a11y.js",
+    "metrics": "node hooks/metrics-dashboard.js"
+  },
+  "keywords": [
+    "claude-code",
+    "claude-plugin",
+    "design-system",
+    "ui",
+    "ux",
+    "frontend",
+    "craft",
+    "design-tokens",
+    "accessibility",
+    "a11y",
+    "validation",
+    "enforcement"
+  ],
+  "author": {
+    "name": "Thiago Edson Pereira",
+    "url": "https://github.com/thiagoedson"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thiagoedson/claude-frontforge.git"
+  },
+  "bugs": {
+    "url": "https://github.com/thiagoedson/claude-frontforge/issues"
+  },
+  "homepage": "https://github.com/thiagoedson/claude-frontforge#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "files": [
+    ".claude/",
+    ".claude-plugin/",
+    "hooks/",
+    "reference/",
+    "README.md",
+    "LICENSE"
+  ]
+}
