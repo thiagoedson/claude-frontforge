@@ -80,11 +80,110 @@ Reinicie o Claude Code.
 ## Commands / Comandos
 
 ```bash
-/claude-frontforge:init           # Smart dispatcher / Despacho inteligente
-/claude-frontforge:status         # Show current system / Ver sistema atual
-/claude-frontforge:audit <path>   # Check code / Verificar codigo
-/claude-frontforge:extract        # Extract patterns / Extrair padroes
+/claude-frontforge:init              # Smart dispatcher / Despacho inteligente
+/claude-frontforge:status            # Show current system / Ver sistema atual
+/claude-frontforge:audit <path>      # Check code / Verificar codigo
+/claude-frontforge:extract           # Extract patterns / Extrair padroes
+/claude-frontforge:generate-tokens   # Generate design tokens / Gerar tokens de design
+/claude-frontforge:metrics           # Health dashboard / Dashboard de saúde
 ```
+
+---
+
+## New Features / Novos Recursos 🚀
+
+### 1. Intelligent Context Detection / Detecção Inteligente de Contexto 🧠
+
+O comando `/init` agora detecta automaticamente o tipo de projeto analisando:
+- **package.json**: Framework (Next.js, React, Vue) e dependências
+- **README.md**: Palavras-chave do domínio (fintech, analytics, dashboard)
+- **Estrutura de pastas**: Padrões de organização
+
+Sugere automaticamente a direção de design mais adequada com nível de confiança.
+
+```bash
+"Detectei projeto Next.js com foco em analytics (alta confiança).
+Sugiro Data & Analysis: grid 4px, paleta otimizada para charts."
+```
+
+### 2. Automatic Token Generation / Geração Automática de Tokens 🎨
+
+Novo comando `/generate-tokens` analisa código existente e extrai:
+- **Spacing**: Valores de padding, margin, gap + detecção de base (4px, 8px)
+- **Colors**: Paleta hex, rgb, hsl com análise de frequência
+- **Shadows**: box-shadow patterns
+- **Border Radius**: Valores recorrentes
+- **Font Sizes**: Hierarquia tipográfica
+
+Gera arquivos CSS, JavaScript ou JSON prontos para uso.
+
+```bash
+node hooks/generate-tokens.js . css > src/styles/tokens.css
+```
+
+### 3. Component Pattern Learning / Aprendizado de Padrões de Componentes 📚
+
+O comando `/extract` agora detecta componentes (Button, Card, Input) e extrai:
+- **Propriedades comuns**: Padding, altura, border-radius
+- **Estados**: hover, active, focus, disabled
+- **Variantes**: primary, secondary, ghost, etc.
+
+Salva padrões em `.frontforge/system.md` para reutilização.
+
+```markdown
+### Button
+- Altura comum: 40px
+- Padding: 12px 20px
+- Border radius: 8px
+- Estados: hover, active, disabled
+- Variantes: primary, secondary, ghost
+```
+
+### 4. Accessibility Validation / Validação de Acessibilidade ♿
+
+Validações automáticas integradas ao hook pós-escrita:
+- **Contraste de cores**: WCAG 2.1 AA/AAA (4.5:1 para texto normal)
+- **Touch targets**: Tamanho mínimo 44x44px para elementos interativos
+- **Hierarquia de headings**: h1 → h2 → h3 (sem pulos)
+- **Alt text**: Imagens devem ter descrição
+- **Labels**: Inputs devem ter label ou aria-label
+- **ARIA**: Elementos com role devem ter suporte a teclado
+
+Bloqueia código com erros críticos de acessibilidade.
+
+```
+🔴 ERROS (2):
+1. Contraste insuficiente: 2.8:1 (mínimo 4.5:1)
+   WCAG 2.1 AA
+   💡 Aumentar contraste entre #888 e #fff
+
+2. Input sem label ou aria-label
+   WCAG 2.1 A (1.3.1, 4.1.2)
+   💡 Adicionar <label> associado ou aria-label
+```
+
+### 5. Metrics Dashboard / Dashboard de Métricas 📊
+
+Novo comando `/metrics` analisa todo o projeto e gera score de saúde (0-100):
+
+```
+📊 SCORE GERAL: 87/100 ████████░░
+   🎯 Muito bom! Pequenas melhorias necessárias
+
+📏 CONSISTÊNCIA DE SPACING: 92% █████████░
+🎨 USO DA PALETA: 78% ███████░░░
+🎭 ESTRATÉGIA DE PROFUNDIDADE: 100% ██████████
+⚡ ANIMAÇÕES: 85% ████████░░
+
+💡 SUGESTÕES:
+1. Padronizar spacing: 14 valores fora do grid
+2. Consolidar paleta: 4 cores fora da paleta
+```
+
+Perfeito para:
+- Code review
+- Monitoramento contínuo de qualidade
+- Identificar áreas que precisam refatoração
 
 ---
 

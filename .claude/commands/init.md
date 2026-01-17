@@ -26,8 +26,6 @@ Be invisible. Don't announce modes or narrate process.
 
 **Instead:** Jump into work. State suggestions with reasoning.
 
-<<<<<<< Updated upstream
-=======
 ## Intelligent Context Detection
 
 Before suggesting, run the context detector to analyze:
@@ -43,37 +41,25 @@ The detector returns a JSON with:
 
 Use this to inform your suggestion, but apply your own judgment too.
 
->>>>>>> Stashed changes
 ## Suggest + Ask
 
 Lead with your recommendation, then confirm:
 ```
-<<<<<<< Updated upstream
-"This feels like a data-heavy admin tool — I'd go minimal.
-Tight spacing, monochrome, borders for depth."
-
-[AskUserQuestion: "Does that direction feel right?"]
-=======
 "Detectei que é um projeto Next.js com foco em analytics (alta confiança).
 Sugiro Data & Analysis: grid de 4px, paleta otimizada para charts, densidade funcional."
 
 [AskUserQuestion: "Essa direção faz sentido?"]
->>>>>>> Stashed changes
 ```
 
 ## Flow
 
 1. Check if `.frontforge/system.md` exists
 2. **If exists**: Apply established patterns
-<<<<<<< Updated upstream
-3. **If not**: Assess context, suggest direction, get confirmation, build
-=======
 3. **If not**:
    - Run context detection: `node ${CLAUDE_PLUGIN_ROOT}/hooks/detect-context.js`
    - Use AI analysis from detection to inform your suggestion
    - Suggest direction with confidence level and reasoning
    - Get confirmation, then build
->>>>>>> Stashed changes
 
 ## After Every Task
 

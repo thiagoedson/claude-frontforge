@@ -8,6 +8,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { validateAccessibility, formatA11yReport } = require('./validate-a11y');
 
 const UI_EXTENSIONS = ['.tsx', '.jsx', '.vue', '.svelte', '.css', '.scss'];
 
@@ -164,6 +165,11 @@ async function main() {
 
   const violations = validateContent(content, system);
 
+  // Validação de Acessibilidade (A11y)
+  const a11yResult = validateAccessibility(content, targetFile);
+  const hasA11yErrors = a11yResult.stats.errors > 0;
+
+  // Reporta violações de design system
   if (violations.length > 0) {
     console.error('\n=== FRONTFORGE VALIDATION ===\n');
 
@@ -177,7 +183,24 @@ async function main() {
 
     console.error('Fix these issues before proceeding.\n');
     console.error('=========================\n');
+  }
+
+  // Reporta violações de acessibilidade
+  if (a11yResult.violations.length > 0) {
+    console.error('\n=== ACESSIBILIDADE (A11Y) ===');
+    console.error(formatA11yReport(a11yResult));
+    console.error('=========================\n');
+  }
+
+  // Exit code: 2 se houver erros de design ou a11y
+  if (violations.length > 0 || hasA11yErrors) {
     process.exit(2);
+  }
+
+  // Exit code: 1 se houver apenas warnings de a11y
+  if (a11yResult.stats.warnings > 0) {
+    console.error('⚠️  Avisos de acessibilidade encontrados (não bloqueante)\n');
+    process.exit(0); // Não bloqueia, mas informa
   }
 
   process.exit(0);

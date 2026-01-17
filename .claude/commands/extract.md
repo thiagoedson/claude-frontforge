@@ -72,9 +72,39 @@ Create .frontforge/system.md with these? (y/n/customize)
 
 ## Implementation
 
-1. Glob for UI files
-2. Parse for repeated values
-3. Identify common patterns
-4. Suggest system based on frequency
-5. Offer to create system.md
-6. Let user customize before saving
+1. Run component extraction: `node ${CLAUDE_PLUGIN_ROOT}/hooks/extract-components.js`
+2. Analyze detected component patterns
+3. Run token generation: `node ${CLAUDE_PLUGIN_ROOT}/hooks/generate-tokens.js`
+4. Combine both analyses
+5. Suggest comprehensive system based on:
+   - Component patterns (Button, Card, Input, etc.)
+   - Design tokens (spacing, colors, shadows)
+   - Depth strategy (borders vs shadows)
+6. Offer to create system.md
+7. Let user customize before saving
+
+## Example Output
+
+```
+Analisei 47 arquivos e encontrei:
+
+Componentes detectados (15):
+  - Button: 8 variações (primary, secondary, ghost)
+    • Altura comum: 40px
+    • Padding: 12px 20px
+    • Border radius: 8px
+  - Card: 12 instâncias
+    • Padding: 20px
+    • Shadow: 0 1px 3px rgba(0,0,0,0.08)
+  - Input: 6 instâncias
+    • Altura: 40px
+    • Border: 1px solid
+
+Tokens de design:
+  - Base de spacing: 4px (85% conformidade)
+  - Escala: 4, 8, 12, 16, 20, 24, 32, 48
+  - Paleta: 18 cores (sugiro reduzir para 8)
+  - Depth strategy: Subtle shadows (3 shadows, 8 borders)
+
+Criar .frontforge/system.md com esses padrões?
+```
