@@ -1,6 +1,6 @@
 {
   "name": "claude-frontforge",
-  "version": "2026.1.16.1543",
+  "version": "2026.1.17.1410",
   "description": "UX engineering skill for Claude Code. Build interfaces with craft, memory, and enforcement.",
   "main": "index.js",
   "scripts": {
