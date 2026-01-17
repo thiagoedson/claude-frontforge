@@ -1,0 +1,57 @@
+# Dependências
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Arquivos gerados pelo plugin (criados pelo usuário, não parte do plugin)
+.frontforge/
+*.frontforge.json
+
+# IDEs e Editores
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Configurações locais
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs/
+*.log
+
+# Cache
+.cache/
+.temp/
+.tmp/
+
+# Build e dist (se houver compilação futura)
+dist/
+build/
+out/
+
+# Sistema Operacional
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Desktop.ini
+Thumbs.db
+
+# Testes
+coverage/
+.nyc_output/
+
+# Arquivos temporários de desenvolvimento
+*.bak
+*.backup
+*.tmp
