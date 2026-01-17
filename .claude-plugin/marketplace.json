@@ -1,0 +1,26 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "claude-frontforge",
+  "metadata": {
+    "description": "UX engineering for Claude Code. Build interfaces with craft, memory, and enforcement."
+  },
+  "owner": {
+    "name": "Thiago Edson Pereira",
+    "url": "https://github.com/thiagoedson"
+  },
+  "plugins": [
+    {
+      "name": "claude-frontforge",
+      "description": "UX engineering for Claude Code. Build interfaces with craft, memory, and enforcement. Maintains consistent design decisions across sessions.",
+      "version": "2026.1.16.1543",
+      "author": {
+        "name": "Thiago Edson Pereira",
+        "url": "https://github.com/thiagoedson"
+      },
+      "source": "./",
+      "category": "design",
+      "homepage": "https://github.com/thiagoedson/claude-frontforge",
+      "tags": ["design", "design-system", "ui", "craft", "memory", "enforcement", "consistency", "tokens"]
+    }
+  ]
+}

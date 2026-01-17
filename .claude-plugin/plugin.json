@@ -1,0 +1,13 @@
+{
+  "name": "claude-frontforge",
+  "description": "UX engineering for Claude Code. Build interfaces with craft, memory, and enforcement. Maintains consistent design decisions across sessions.",
+  "version": "2026.1.16.1543",
+  "author": {
+    "name": "Thiago Edson Pereira",
+    "url": "https://github.com/thiagoedson"
+  },
+  "homepage": "https://github.com/thiagoedson/claude-frontforge",
+  "repository": "https://github.com/thiagoedson/claude-frontforge",
+  "commands": "./.claude/commands",
+  "skills": "./.claude/skills"
+}
