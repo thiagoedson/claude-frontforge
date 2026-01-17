@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
+import { writeFileSync, existsSync } from 'fs';
 import { ConfigLoader } from './config';
 import { PlaceholderClaudeAdapter } from './adapters';
 import { Generator } from './generator';
@@ -54,7 +55,6 @@ program
   .command('init')
   .description('Initialize a new frontforge.config.json file')
   .action(() => {
-    const { writeFileSync, existsSync } = require('fs');
     const configPath = './frontforge.config.json';
 
     if (existsSync(configPath)) {

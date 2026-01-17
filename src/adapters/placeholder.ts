@@ -204,7 +204,7 @@ export const Component: React.FC = () => {
     <div className="component">
       <h2>Generated Component</h2>
       <p>This component was generated based on your prompt.</p>
-      <p>Prompt: {${JSON.stringify(prompt)}}</p>
+      <p>Prompt: ${JSON.stringify(prompt)}</p>
     </div>
   );
 };

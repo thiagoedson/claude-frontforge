@@ -1,7 +1,7 @@
 import { Generator } from '../generator';
 import { PlaceholderClaudeAdapter } from '../adapters';
 import { DEFAULT_CONFIG } from '../config';
-import { existsSync, unlinkSync, rmdirSync } from 'fs';
+import { existsSync, unlinkSync, rmdirSync, readdirSync } from 'fs';
 import { resolve } from 'path';
 
 describe('Generator', () => {
@@ -17,7 +17,7 @@ describe('Generator', () => {
   afterEach(() => {
     // Clean up test output directory
     if (existsSync(testOutputDir)) {
-      const files = require('fs').readdirSync(testOutputDir);
+      const files = readdirSync(testOutputDir);
       files.forEach((file: string) => {
         unlinkSync(resolve(testOutputDir, file));
       });
