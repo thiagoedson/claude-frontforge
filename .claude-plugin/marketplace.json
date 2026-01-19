@@ -11,8 +11,8 @@
   "plugins": [
     {
       "name": "claude-frontforge",
-      "description": "UX engineering for Claude Code. Build interfaces with craft, memory, and enforcement. Maintains consistent design decisions across sessions.",
-      "version": "2026.1.17.1410",
+      "description": "UX engineering for Claude Code. Build interfaces with craft, memory, and enforcement. NEW: Persistent status line with real-time session metrics.",
+      "version": "2026.1.19.2100",
       "author": {
         "name": "Thiago Edson Pereira",
         "url": "https://github.com/thiagoedson"
@@ -20,7 +20,7 @@
       "source": "./",
       "category": "design",
       "homepage": "https://github.com/thiagoedson/claude-frontforge",
-      "tags": ["design", "design-system", "ui", "craft", "memory", "enforcement", "consistency", "tokens"]
+      "tags": ["design", "design-system", "ui", "craft", "memory", "enforcement", "consistency", "tokens", "status-line", "metrics"]
     }
   ]
 }
