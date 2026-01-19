@@ -5,6 +5,46 @@ Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/),
 e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [2026.1.19.2100] - 2026-01-19
+
+### ✨ Adicionado
+
+#### 📊 Barra de Status Persistente (Status Line)
+- **Novo comando** `/claude-frontforge:setup-statusline` para configuração automática
+- **Script de status line** (`reference/statusline.sh`) totalmente customizável
+- **Exibição em tempo real** de métricas da sessão:
+  - 💎 Modelo atual (Sonnet, Opus, Haiku)
+  - 🟢🟡🔴 % de contexto usado (com alertas visuais coloridos)
+  - 💚💛❤️ Custo da sessão em R$ com taxa de queima por hora
+  - ⏱️ Tempo de sessão formatado (Xh Ym)
+  - 🌿 Branch git atual
+  - ✅⚠️ Design system ativo (direção Frontforge)
+- **Configuração automática** de `.claude/settings.json`
+- **Alertas visuais dinâmicos**:
+  - Verde/Amarelo/Vermelho para contexto (<50%, 50-80%, >80%)
+  - Verde/Amarelo/Vermelho para custo (<R$5, R$5-15, >R$15)
+- **Suporte multiplataforma**: Unix, macOS, Windows (via Git Bash/WSL)
+- **Totalmente customizável**: usuários podem editar o script para adicionar informações personalizadas
+
+**Exemplo de output:**
+```
+💎 Sonnet | 🟢 38% ctx | 💚 R$ 1.20 (~R$0.85/h) | ⏱️  45m | feat/ui | ✅ Precision
+```
+
+### 🔧 Modificado
+
+- **README.md**: Adicionada seção sobre Status Line como primeira feature em "New Features"
+- **Numeração de features**: Reordenadas para destacar Status Line como feature principal
+
+### 📝 Documentação
+
+- Criado comando completo em `.claude/commands/setup-statusline.md`
+- Adicionadas instruções de setup, troubleshooting e customização
+- Documentação de requisitos (jq, bc, git)
+- Exemplos de uso e personalização
+
+---
+
 ## [2026.1.17.1410] - 2026-01-17
 
 ### ✨ Adicionado

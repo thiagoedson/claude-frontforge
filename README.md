@@ -75,6 +75,7 @@ node install.js --llm gemini    # Gemini CLI
 ```
 
 This will:
+
 1. ✅ Download all validation scripts to `./frontforge`
 2. ✅ Configure your LLM with design system rules
 3. ✅ Set up automatic validation
@@ -123,15 +124,49 @@ Reinicie o Claude Code.
 /claude-frontforge:extract           # Extract patterns / Extrair padroes
 /claude-frontforge:generate-tokens   # Generate design tokens / Gerar tokens de design
 /claude-frontforge:metrics           # Health dashboard / Dashboard de saúde
+/claude-frontforge:setup-statusline  # Configure persistent status line / Configurar barra de status
 ```
 
 ---
 
 ## New Features / Novos Recursos 🚀
 
-### 1. Intelligent Context Detection / Detecção Inteligente de Contexto 🧠
+### 1. Persistent Status Line / Barra de Status Persistente 📊 **NEW!**
+
+Configure uma barra de status sempre visível (como no Claude Code via API) que mostra em tempo real:
+
+- **💎 Modelo atual**: Sonnet, Opus ou Haiku
+- **🟢🟡🔴 Contexto usado**: % da janela de contexto (com cores dinâmicas)
+- **💚💛❤️ Custo da sessão**: Em R$ com taxa de queima por hora
+- **⏱️ Tempo de sessão**: Duração formatada (1h23m)
+- **🌿 Branch git**: Branch atual do projeto
+- **✅⚠️ Design System**: Direção ativa do Frontforge
+
+**Exemplo de output:**
+```
+💎 Sonnet | 🟢 38% ctx | 💚 R$ 1.20 (~R$0.85/h) | ⏱️  45m | feat/ui | ✅ Precision
+```
+
+**Como ativar:**
+```bash
+/claude-frontforge:setup-statusline
+```
+
+O comando configura automaticamente `.frontforge/statusline.sh` e `.claude/settings.json`.
+
+**Benefícios:**
+- ✅ Controle financeiro em tempo real
+- ✅ Alerta visual quando contexto chega em 80%
+- ✅ Monitoramento de produtividade (tempo de sessão)
+- ✅ Contexto visual (branch + design system)
+- ✅ Totalmente customizável
+
+---
+
+### 2. Intelligent Context Detection / Detecção Inteligente de Contexto 🧠
 
 O comando `/init` agora detecta automaticamente o tipo de projeto analisando:
+
 - **package.json**: Framework (Next.js, React, Vue) e dependências
 - **README.md**: Palavras-chave do domínio (fintech, analytics, dashboard)
 - **Estrutura de pastas**: Padrões de organização
@@ -143,9 +178,10 @@ Sugere automaticamente a direção de design mais adequada com nível de confian
 Sugiro Data & Analysis: grid 4px, paleta otimizada para charts."
 ```
 
-### 2. Automatic Token Generation / Geração Automática de Tokens 🎨
+### 3. Automatic Token Generation / Geração Automática de Tokens 🎨
 
 Novo comando `/generate-tokens` analisa código existente e extrai:
+
 - **Spacing**: Valores de padding, margin, gap + detecção de base (4px, 8px)
 - **Colors**: Paleta hex, rgb, hsl com análise de frequência
 - **Shadows**: box-shadow patterns
@@ -158,9 +194,10 @@ Gera arquivos CSS, JavaScript ou JSON prontos para uso.
 node hooks/generate-tokens.js . css > src/styles/tokens.css
 ```
 
-### 3. Component Pattern Learning / Aprendizado de Padrões de Componentes 📚
+### 4. Component Pattern Learning / Aprendizado de Padrões de Componentes 📚
 
 O comando `/extract` agora detecta componentes (Button, Card, Input) e extrai:
+
 - **Propriedades comuns**: Padding, altura, border-radius
 - **Estados**: hover, active, focus, disabled
 - **Variantes**: primary, secondary, ghost, etc.
@@ -176,9 +213,10 @@ Salva padrões em `.frontforge/system.md` para reutilização.
 - Variantes: primary, secondary, ghost
 ```
 
-### 4. Accessibility Validation / Validação de Acessibilidade ♿
+### 5. Accessibility Validation / Validação de Acessibilidade ♿
 
 Validações automáticas integradas ao hook pós-escrita:
+
 - **Contraste de cores**: WCAG 2.1 AA/AAA (4.5:1 para texto normal)
 - **Touch targets**: Tamanho mínimo 44x44px para elementos interativos
 - **Hierarquia de headings**: h1 → h2 → h3 (sem pulos)
@@ -199,7 +237,7 @@ Bloqueia código com erros críticos de acessibilidade.
    💡 Adicionar <label> associado ou aria-label
 ```
 
-### 5. Metrics Dashboard / Dashboard de Métricas 📊
+### 6. Metrics Dashboard / Dashboard de Métricas 📊
 
 Novo comando `/metrics` analisa todo o projeto e gera score de saúde (0-100):
 
@@ -218,6 +256,7 @@ Novo comando `/metrics` analisa todo o projeto e gera score de saúde (0-100):
 ```
 
 Perfeito para:
+
 - Code review
 - Monitoramento contínuo de qualidade
 - Identificar áreas que precisam refatoração
@@ -275,10 +314,12 @@ Se houver violacao, o hook bloqueia a conclusao e mostra a regra exata.
 ## Examples / Exemplos
 
 See `reference/examples/`:
+
 - `reference/examples/system-precision.md`
 - `reference/examples/system-warmth.md`
 
 Veja `reference/examples/`:
+
 - `reference/examples/system-precision.md`
 - `reference/examples/system-warmth.md`
 
@@ -292,5 +333,6 @@ MIT — Veja `LICENSE`.
 
 ---
 
-Website: https://cassonestudio.com.br/  
-GitHub: https://github.com/thiagoedson/claude-frontforge
+Website: [https://cassonestudio.com.br/](https://cassonestudio.com.br/)  
+Plugin Page / Página do Plugin: [https://cassonestudio.com.br/app/claude-frontforge/](https://cassonestudio.com.br/app/claude-frontforge/)  
+GitHub: [https://github.com/thiagoedson/claude-frontforge](https://github.com/thiagoedson/claude-frontforge)
