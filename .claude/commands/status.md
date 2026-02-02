@@ -7,6 +7,21 @@ description: Show current design system state including direction, tokens, and p
 
 Show current design system state.
 
+## Visual Indicator
+
+First, display the status banner to show the skill is active:
+
+```
+╭─────────────────────────────────────────────╮
+│ FRONTFORGE ● Active                         │
+├─────────────────────────────────────────────┤
+│ Direction:  [Direction Name]                │
+│ Spacing:    [Xpx base]                      │
+│ Depth:      [Strategy]                      │
+│ Confidence: [Score]                         │
+╰─────────────────────────────────────────────╯
+```
+
 ## What to Show
 
 **If `.frontforge/system.md` exists:**

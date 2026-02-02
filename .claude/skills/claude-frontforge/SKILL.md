@@ -7,6 +7,23 @@ description: This skill is for interface design — dashboards, admin panels, ap
 
 Build interface design with craft, consistency, and confidence.
 
+---
+
+# Visual Activation Banner
+
+**IMPORTANT:** When this skill is activated (via `/init` or any frontforge command), ALWAYS display the visual banner first to indicate the skill is running:
+
+```
+╭──────────────────────────────────────────────────────────────╮
+│  █▀▀█▀█ █▀██▄░█▀█▀█▀▀█▀█ █▀██▀▀█▀▀  UX Engineering          │
+│  █▀░█▀▄ █▄██░▀█░█░█▀░█▄█ █▀▄█▄███▄  for Claude Code         │
+├──────────────────────────────────────────────────────────────┤
+│  ✨ Craft · 💾 Memory · 🛡️  Enforcement      ◆ ACTIVE ◆      │
+╰──────────────────────────────────────────────────────────────╯
+```
+
+This helps users clearly identify that the Frontforge skill is engaged and ready.
+
 ## Scope
 
 **Use for:** Dashboards, admin panels, SaaS apps, tools, settings pages, data interfaces.
