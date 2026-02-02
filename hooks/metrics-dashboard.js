@@ -2,10 +2,13 @@
 
 const fs = require('fs');
 const path = require('path');
+const { checkCache, updateCache } = require('./cache');
 
 /**
  * Dashboard de Métricas do Design System
  * Analisa conformidade e consistência do código com o sistema de design
+ *
+ * Com sistema de cache para evitar reprocessamento
  */
 
 /**
@@ -471,7 +474,7 @@ function generateSuggestions(metrics) {
 /**
  * Função principal
  */
-async function analyzeMetrics(projectRoot = process.cwd()) {
+async function analyzeMetrics(projectRoot = process.cwd(), useCache = true) {
   console.error('📊 Analisando métricas do design system...\n');
 
   // Lê sistema
@@ -488,6 +491,19 @@ async function analyzeMetrics(projectRoot = process.cwd()) {
   const files = findUIFiles(projectRoot);
   console.error(`📁 Analisando ${files.length} arquivos...\n`);
 
+  // Verifica cache (inclui system.md na verificação)
+  const cacheKey = 'metrics-dashboard';
+  const filesToCheck = [...files, systemPath];
+
+  if (useCache) {
+    const cached = checkCache(cacheKey, filesToCheck, projectRoot);
+    if (cached.valid) {
+      console.error('⚡ Usando métricas em cache (arquivos não modificados)\n');
+      console.log(cached.data.report);
+      return cached.data.result;
+    }
+  }
+
   // Executa análises
   const metrics = {
     spacing: analyzeSpacingCompliance(files, system),
@@ -500,6 +516,13 @@ async function analyzeMetrics(projectRoot = process.cwd()) {
 
   // Gera relatório
   const report = generateReport(metrics, overallScore);
+
+  // Salva em cache
+  if (useCache) {
+    const cacheResult = checkCache(cacheKey, filesToCheck, projectRoot);
+    updateCache(cacheKey, cacheResult.hash, { report, result: { metrics, overallScore } }, projectRoot);
+    console.error('💾 Métricas salvas em cache\n');
+  }
 
   console.log(report);
 
