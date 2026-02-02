@@ -239,6 +239,11 @@ For more detail on specific topics:
 - `agents/ux-interpreter.md` — Website analysis protocol
 - `agents/component-architect.md` — Component design patterns
 - `agents/animation-specialist.md` — Motion guidelines
+- `references/devices.md` — Breakpoints, touch vs mouse, viewport handling
+- `references/styles.md` — Component patterns, buttons, inputs, cards, navigation
+- `references/interactions.md` — Hover, focus, loading states, feedback, animations
+- `references/responsive.md` — Mobile-first patterns, layout strategies, adaptations
+
 
 # Commands
 
