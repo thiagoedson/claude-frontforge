@@ -1,7 +1,7 @@
 {
   "name": "claude-frontforge",
-  "version": "2026.1.17.1410",
-  "description": "UX engineering skill for Claude Code. Build interfaces with craft, memory, and enforcement.",
+  "version": "2026.2.2.1000",
+  "description": "UX engineering skill for Claude Code. Build interfaces with craft, memory, and enforcement. Now with specialized agents and multi-format token export.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,7 +10,8 @@
     "generate-tokens": "node hooks/generate-tokens.js",
     "extract-components": "node hooks/extract-components.js",
     "validate-a11y": "node hooks/validate-a11y.js",
-    "metrics": "node hooks/metrics-dashboard.js"
+    "metrics": "node hooks/metrics-dashboard.js",
+    "analyze-website": "node hooks/analyze-website.js"
   },
   "keywords": [
     "claude-code",
@@ -24,7 +25,14 @@
     "accessibility",
     "a11y",
     "validation",
-    "enforcement"
+    "enforcement",
+    "tailwind",
+    "figma",
+    "ux-interpreter",
+    "component-architect",
+    "responsive",
+    "animation",
+    "confidence-scores"
   ],
   "author": {
     "name": "Thiago Edson Pereira",
@@ -50,6 +58,7 @@
     ".claude-plugin/",
     "hooks/",
     "reference/",
+    "agents/",
     "install.js",
     "USE_WITH_OTHER_LLMS.md",
     "README.md",

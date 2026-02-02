@@ -123,6 +123,7 @@ Reinicie o Claude Code.
 /claude-frontforge:audit <path>      # Check code / Verificar codigo
 /claude-frontforge:extract           # Extract patterns / Extrair padroes
 /claude-frontforge:generate-tokens   # Generate design tokens / Gerar tokens de design
+/claude-frontforge:analyze-website   # Extract tokens from live websites / Extrair tokens de sites
 /claude-frontforge:metrics           # Health dashboard / Dashboard de saúde
 /claude-frontforge:setup-statusline  # Configure persistent status line / Configurar barra de status
 ```
@@ -131,7 +132,53 @@ Reinicie o Claude Code.
 
 ## New Features / Novos Recursos 🚀
 
-### 1. Persistent Status Line / Barra de Status Persistente 📊 **NEW!**
+### 0. Specialized Agents / Agentes Especializados 🤖 **NEW!**
+
+Agentes especializados para tarefas focadas de UX:
+
+| Agent | Purpose / Propósito |
+|-------|---------------------|
+| **UX Interpreter** | Extract design systems from live websites / Extrair design systems de sites |
+| **Component Architect** | Design scalable, accessible components / Projetar componentes escaláveis |
+| **Animation Specialist** | Create purposeful micro-interactions / Criar micro-interações |
+| **Responsive Expert** | Mobile-first responsive layouts / Layouts responsivos mobile-first |
+| **UX Researcher** | Create personas, analyze flows / Criar personas, analisar fluxos |
+
+```bash
+# Analyze a website
+/claude-frontforge:analyze-website stripe.com
+
+# Compare multiple sites
+/claude-frontforge:analyze-website stripe.com linear.app --compare
+```
+
+See `agents/` directory for detailed guidelines.
+
+---
+
+### 0.1. Multi-Format Token Export / Export de Tokens Multi-Formato 📦 **NEW!**
+
+Generate design tokens in multiple formats:
+
+```bash
+# CSS Custom Properties
+node hooks/generate-tokens.js . css
+
+# Tailwind Config
+node hooks/generate-tokens.js . tailwind
+
+# Figma Tokens (tokens.studio compatible)
+node hooks/generate-tokens.js . figma
+
+# JSON (raw data with confidence scores)
+node hooks/generate-tokens.js . json
+```
+
+Outputs now include **confidence scores** for extracted patterns!
+
+---
+
+### 1. Persistent Status Line / Barra de Status Persistente 📊
 
 Configure uma barra de status sempre visível (como no Claude Code via API) que mostra em tempo real:
 
