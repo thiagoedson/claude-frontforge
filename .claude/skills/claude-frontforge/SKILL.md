@@ -138,6 +138,10 @@ For more detail on specific topics:
 - `references/principles.md` — Code examples, specific values, dark mode
 - `references/directions.md` — The 6 design personalities
 - `references/validation.md` — Memory management, when to update system.md
+- `references/devices.md` — Breakpoints, touch vs mouse, viewport handling
+- `references/styles.md` — Component patterns, buttons, inputs, cards, navigation
+- `references/interactions.md` — Hover, focus, loading states, feedback, animations
+- `references/responsive.md` — Mobile-first patterns, layout strategies, adaptations
 
 # Commands
 
