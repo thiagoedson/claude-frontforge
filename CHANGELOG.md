@@ -5,6 +5,64 @@ Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/),
 e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [2026.2.2.1000] - 2026-02-02
+
+### ✨ Adicionado
+
+#### 🤖 Agentes Especializados (Inspirado em ux-interpreter e claude-code-ui-agents)
+- **Nova estrutura `agents/`** com 5 agentes especializados:
+  - `ux-interpreter.md` - Extrai design systems de websites via análise visual
+  - `component-architect.md` - Design de componentes escaláveis e acessíveis
+  - `animation-specialist.md` - Micro-interações com suporte a prefers-reduced-motion
+  - `responsive-expert.md` - Layouts mobile-first responsivos
+  - `ux-researcher.md` - Personas, análise de fluxos, heurísticas
+- Baseado nos projetos de referência:
+  - [agenisea/ux-interpreter-cc-plugins](https://github.com/agenisea/ux-interpreter-cc-plugins)
+  - [mustafakendiguzel/claude-code-ui-agents](https://github.com/mustafakendiguzel/claude-code-ui-agents)
+
+#### 🌐 Comando analyze-website
+- **Novo comando** `/claude-frontforge:analyze-website` para análise de websites
+- Extração de tokens com **confidence scores** (75-95%)
+- Protocolo de 3-Pass Capture:
+  1. Structure Pass (1440px desktop)
+  2. Component Pass (elementos)
+  3. Interaction Pass (estados + responsivo)
+- Análise de **content strategy** e **visual-verbal coherence**
+- Modo de comparação para múltiplos sites
+- Output estruturado com **decision traces**
+
+#### 📦 Multi-Format Token Export
+- Suporte a **Tailwind CSS** config
+- Suporte a **Figma Tokens** (tokens.studio compatible)
+- **Confidence scores** em todos os outputs
+- Novos formatos: `tailwind`, `figma`, `json`
+
+#### 📈 Sistema de Confidence Scores
+- Scores de confiança para todos os tokens extraídos
+- Tabela de accuracy esperada:
+  - Spacing patterns: 75-80%
+  - Typography scale: 80-85%
+  - Color structure: 85-90%
+  - Content strategy: 90-95%
+  - Font family ID: ~60%
+- Transparência sobre limitações e incertezas
+
+### 🔧 Modificado
+
+- **SKILL.md**: Adicionadas diretrizes de confidence scores e agentes especializados
+- **generate-tokens.js**: Adicionados formatos Tailwind e Figma + confidence scores
+- **README.md**: Nova seção "Specialized Agents" e "Multi-Format Export"
+- **package.json**: Atualizado para v2026.2.2.1000, novas keywords
+
+### 📝 Documentação
+
+- Documentação completa dos 5 agentes especializados
+- Novo comando `/analyze-website` documentado
+- Exemplos de uso para todos os formatos de export
+- Guia de confidence scores e suas limitações
+
+---
+
 ## [2026.1.19.2100] - 2026-01-19
 
 ### ✨ Adicionado

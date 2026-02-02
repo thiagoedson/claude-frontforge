@@ -3,6 +3,27 @@ name: claude-frontforge:init
 description: Build UX with craft and consistency. For interface design (dashboards, apps, tools) — not marketing sites.
 ---
 
+## Visual Activation
+
+When this command runs, first show the Frontforge banner to indicate the skill is active:
+
+```
+node ${CLAUDE_PLUGIN_ROOT}/hooks/banner.js compact
+```
+
+Or display this visual indicator inline:
+
+```
+╭──────────────────────────────────────────────────────────────╮
+│  █▀▀█▀██▀██▄░█▀█▀█▀▀█▀██▀██▀▀█▀▀  UX Engineering for Claude  │
+│  █▀░█▀▄█▄██░▀█░█░█▀░█▄██▀▄█▄███▄  v2026.2.2                  │
+├──────────────────────────────────────────────────────────────┤
+│  ✨ Craft · 💾 Memory · 🛡️  Enforcement                       │
+╰──────────────────────────────────────────────────────────────╯
+```
+
+---
+
 Use the claude-frontforge skill to build interface design.
 
 **Scope:** Dashboards, apps, tools, admin panels. Not landing pages or marketing sites.

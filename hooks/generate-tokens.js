@@ -346,6 +346,166 @@ function generateJSTokens(tokens) {
 }
 
 /**
+ * Gera configuração Tailwind CSS
+ */
+function generateTailwindTokens(tokens) {
+  const config = {
+    theme: {
+      extend: {
+        spacing: {},
+        colors: {
+          brand: {}
+        },
+        boxShadow: {},
+        borderRadius: {},
+        fontSize: {}
+      }
+    }
+  };
+
+  // Spacing scale
+  tokens.spacing.scale.forEach((value, index) => {
+    const name = ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl'][index] || `${index}`;
+    config.theme.extend.spacing[name] = `${value}px`;
+  });
+
+  // Colors - organize by hue similarity
+  tokens.colors.slice(0, 10).forEach((color, index) => {
+    config.theme.extend.colors.brand[`${(index + 1) * 100}`] = color;
+  });
+
+  // Shadows
+  tokens.shadows.slice(0, 5).forEach((shadow, index) => {
+    const name = ['sm', 'DEFAULT', 'md', 'lg', 'xl'][index] || `${index}`;
+    config.theme.extend.boxShadow[name] = shadow;
+  });
+
+  // Border Radius
+  tokens.borderRadius.slice(0, 5).forEach((radius, index) => {
+    const name = ['sm', 'DEFAULT', 'md', 'lg', 'xl'][index] || `${index}`;
+    config.theme.extend.borderRadius[name] = radius;
+  });
+
+  // Font Sizes
+  tokens.fontSize.slice(0, 8).forEach((size, index) => {
+    const name = ['xs', 'sm', 'base', 'lg', 'xl', '2xl', '3xl', '4xl'][index] || `${index}`;
+    config.theme.extend.fontSize[name] = size;
+  });
+
+  let tailwind = '// Tailwind Config - Gerado automaticamente pelo claude-frontforge\n';
+  tailwind += '// Cole no seu tailwind.config.js dentro de module.exports\n\n';
+  tailwind += `module.exports = ${JSON.stringify(config, null, 2)};\n`;
+
+  return tailwind;
+}
+
+/**
+ * Gera tokens no formato Figma Tokens (compatível com plugin)
+ */
+function generateFigmaTokens(tokens) {
+  const figmaTokens = {
+    global: {
+      spacing: {},
+      colors: {
+        brand: {},
+        semantic: {}
+      },
+      shadows: {},
+      borderRadius: {},
+      typography: {
+        fontSize: {}
+      }
+    }
+  };
+
+  // Spacing
+  tokens.spacing.scale.forEach((value, index) => {
+    const name = ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl'][index] || `${index}`;
+    figmaTokens.global.spacing[name] = {
+      value: `${value}px`,
+      type: 'spacing'
+    };
+  });
+
+  // Colors
+  tokens.colors.slice(0, 10).forEach((color, index) => {
+    figmaTokens.global.colors.brand[`${(index + 1) * 100}`] = {
+      value: color,
+      type: 'color'
+    };
+  });
+
+  // Shadows
+  tokens.shadows.slice(0, 5).forEach((shadow, index) => {
+    const name = ['sm', 'md', 'lg', 'xl', '2xl'][index] || `${index}`;
+    figmaTokens.global.shadows[name] = {
+      value: shadow,
+      type: 'boxShadow'
+    };
+  });
+
+  // Border Radius
+  tokens.borderRadius.slice(0, 5).forEach((radius, index) => {
+    const name = ['sm', 'md', 'lg', 'xl', '2xl'][index] || `${index}`;
+    figmaTokens.global.borderRadius[name] = {
+      value: radius,
+      type: 'borderRadius'
+    };
+  });
+
+  // Font Sizes
+  tokens.fontSize.slice(0, 8).forEach((size, index) => {
+    const name = ['xs', 'sm', 'base', 'lg', 'xl', '2xl', '3xl', '4xl'][index] || `${index}`;
+    figmaTokens.global.typography.fontSize[name] = {
+      value: size,
+      type: 'fontSizes'
+    };
+  });
+
+  let figma = '// Figma Tokens - Gerado automaticamente pelo claude-frontforge\n';
+  figma += '// Compatível com Figma Tokens plugin (https://tokens.studio/)\n';
+  figma += '// Importe este arquivo JSON no plugin\n\n';
+  figma += JSON.stringify(figmaTokens, null, 2) + '\n';
+
+  return figma;
+}
+
+/**
+ * Calcula scores de confiança para os tokens extraídos
+ */
+function calculateConfidenceScores(tokens) {
+  const scores = {};
+
+  // Spacing confidence - baseado na consistência com a base
+  const spacingValues = tokens.spacing.detected
+    .filter(v => v.endsWith('px'))
+    .map(v => parseInt(v));
+
+  if (spacingValues.length > 0) {
+    const onGrid = spacingValues.filter(v => v % tokens.spacing.base === 0);
+    scores.spacing = Math.round((onGrid.length / spacingValues.length) * 100);
+  } else {
+    scores.spacing = 0;
+  }
+
+  // Color confidence - baseado na frequência de uso
+  scores.colors = tokens.colors.length > 5 ? 85 : tokens.colors.length > 0 ? 70 : 0;
+
+  // Shadow confidence - baseado na presença de padrões
+  scores.shadows = tokens.shadows.length > 2 ? 80 : tokens.shadows.length > 0 ? 60 : 0;
+
+  // Overall confidence
+  scores.overall = Math.round(
+    (scores.spacing * 0.3) +
+    (scores.colors * 0.3) +
+    (scores.shadows * 0.2) +
+    (tokens.borderRadius.length > 0 ? 20 : 0)
+  );
+
+  return scores;
+}
+
+/**
  * Função principal
  */
 async function generateTokens(projectRoot = process.cwd(), outputFormat = 'css') {
@@ -398,12 +558,20 @@ async function generateTokens(projectRoot = process.cwd(), outputFormat = 'css')
     }
   };
 
+  // Calcula scores de confiança
+  const confidence = calculateConfidenceScores(tokens);
+  tokens.confidence = confidence;
+
   // Gera output
   let output;
   if (outputFormat === 'css') {
     output = generateCSSTokens(tokens);
   } else if (outputFormat === 'js' || outputFormat === 'ts') {
     output = generateJSTokens(tokens);
+  } else if (outputFormat === 'tailwind') {
+    output = generateTailwindTokens(tokens);
+  } else if (outputFormat === 'figma') {
+    output = generateFigmaTokens(tokens);
   } else {
     output = JSON.stringify(tokens, null, 2);
   }
@@ -418,6 +586,11 @@ async function generateTokens(projectRoot = process.cwd(), outputFormat = 'css')
   console.error(`  - Valores de spacing: ${tokens.stats.spacingValuesFound}`);
   console.error(`  - Shadows: ${tokens.stats.shadowsFound}`);
   console.error(`  - Base de spacing detectada: ${spacingBase}px`);
+  console.error('\n📈 Scores de Confiança:');
+  console.error(`  - Spacing: ${confidence.spacing}%`);
+  console.error(`  - Colors: ${confidence.colors}%`);
+  console.error(`  - Shadows: ${confidence.shadows}%`);
+  console.error(`  - Overall: ${confidence.overall}%`);
 
   return tokens;
 }
@@ -426,9 +599,18 @@ async function generateTokens(projectRoot = process.cwd(), outputFormat = 'css')
 if (require.main === module) {
   const args = process.argv.slice(2);
   const projectRoot = args[0] || process.cwd();
-  const outputFormat = args[1] || 'css'; // css, js, ts, json
+  const outputFormat = args[1] || 'css'; // css, js, ts, json, tailwind, figma
+
+  console.error('📦 Formatos disponíveis: css, js, ts, json, tailwind, figma\n');
 
   generateTokens(projectRoot, outputFormat);
 }
 
-module.exports = { generateTokens };
+module.exports = {
+  generateTokens,
+  generateCSSTokens,
+  generateJSTokens,
+  generateTailwindTokens,
+  generateFigmaTokens,
+  calculateConfidenceScores
+};
