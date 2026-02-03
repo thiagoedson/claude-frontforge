@@ -6,6 +6,8 @@
   "scripts": {
     "test": "node hooks/__tests__/run-all.js",
     "verify": "node verify-installation.js",
+    "validate": "node hooks/validate-frontforge.js",
+    "validate:fix": "node hooks/validate-frontforge.js --fix",
     "detect-context": "node hooks/detect-context.js",
     "generate-tokens": "node hooks/generate-tokens.js",
     "extract-components": "node hooks/extract-components.js",
