@@ -2,10 +2,13 @@
 
 const fs = require('fs');
 const path = require('path');
+const { checkCache, updateCache } = require('./cache');
 
 /**
  * Sistema de Geração Automática de Tokens de Design
  * Analisa código existente e extrai padrões de design
+ *
+ * Com sistema de cache para evitar reprocessamento
  */
 
 // Padrões regex para extrair valores
@@ -508,7 +511,7 @@ function calculateConfidenceScores(tokens) {
 /**
  * Função principal
  */
-async function generateTokens(projectRoot = process.cwd(), outputFormat = 'css') {
+async function generateTokens(projectRoot = process.cwd(), outputFormat = 'css', useCache = true) {
   console.error('🎨 Analisando código para extrair tokens de design...\n');
 
   // Encontra arquivos de estilo
@@ -518,6 +521,17 @@ async function generateTokens(projectRoot = process.cwd(), outputFormat = 'css')
   if (styleFiles.length === 0) {
     console.error('⚠️  Nenhum arquivo de estilo encontrado');
     return null;
+  }
+
+  // Verifica cache
+  const cacheKey = `generate-tokens-${outputFormat}`;
+  if (useCache) {
+    const cached = checkCache(cacheKey, styleFiles, projectRoot);
+    if (cached.valid) {
+      console.error('⚡ Usando tokens em cache (arquivos não modificados)\n');
+      console.log(cached.data.output);
+      return cached.data.tokens;
+    }
   }
 
   // Lê e concatena conteúdo
@@ -579,8 +593,15 @@ async function generateTokens(projectRoot = process.cwd(), outputFormat = 'css')
   // Output para stdout
   console.log(output);
 
+  // Salva em cache para futuras execuções
+  if (useCache) {
+    const cacheResult = checkCache(cacheKey, styleFiles, projectRoot);
+    updateCache(cacheKey, cacheResult.hash, { tokens, output }, projectRoot);
+    console.error('💾 Tokens salvos em cache\n');
+  }
+
   // Também salva estatísticas em stderr para debug
-  console.error('\n📊 Estatísticas:');
+  console.error('📊 Estatísticas:');
   console.error(`  - Arquivos analisados: ${tokens.stats.filesAnalyzed}`);
   console.error(`  - Cores encontradas: ${tokens.stats.colorsFound}`);
   console.error(`  - Valores de spacing: ${tokens.stats.spacingValuesFound}`);
