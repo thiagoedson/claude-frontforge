@@ -1,7 +1,7 @@
 {
   "name": "claude-frontforge",
-  "version": "2026.2.2.1000",
-  "description": "UX engineering skill for Claude Code. Build interfaces with craft, memory, and enforcement. Now with specialized agents and multi-format token export.",
+  "version": "2026.2.4.1200",
+  "description": "UX engineering skill for Claude Code. Build interfaces with craft, memory, and enforcement. Now with extended validations, autofix support, and optimized token usage.",
   "main": "index.js",
   "scripts": {
     "test": "node hooks/__tests__/run-all.js",

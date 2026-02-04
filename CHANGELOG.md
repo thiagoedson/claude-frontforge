@@ -5,6 +5,32 @@ Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/),
 e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [2026.2.4.1200] - 2026-02-04
+
+### ✨ Adicionado
+
+#### 🔍 Validações Estendidas com Autofix
+- **Novo sistema de validações** com suporte a correção automática
+- Flag `--fix` para correção automática de problemas detectados
+- Validações adicionais para consistência de código
+- Integração aprimorada com workflow de desenvolvimento
+
+### ⚡ Performance
+
+#### 📦 Otimização de Uso de Tokens (~85% redução)
+- **Redução significativa** no tamanho dos arquivos de referência
+- Otimização de ~85% no uso de tokens do contexto
+- Carregamento mais rápido e menor consumo de recursos
+- Melhoria na experiência do usuário com respostas mais ágeis
+
+### 🔧 Modificado
+
+- **package.json**: Atualizado para v2026.2.4.1200
+- **Arquivos de referência**: Otimizados para menor consumo de tokens
+- **Sistema de validação**: Adicionado suporte a autofix
+
+---
+
 ## [2026.2.2.1000] - 2026-02-02
 
 ### ✨ Adicionado
