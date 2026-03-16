@@ -1,63 +1,72 @@
 ---
 name: claude-frontforge:generate-tokens
-description: Analisa código existente e gera tokens de design automaticamente (spacing, colors, shadows, etc.)
+description: Generate a design token file by scanning your codebase for spacing, color, shadow, and radius patterns. Outputs CSS custom properties, Tailwind config, JS/TS object, or Figma tokens (tokens.studio format).
 ---
 
-Gera tokens de design analisando código existente no projeto.
+Analyze existing code to generate design tokens for the project.
 
-## Como funciona
+## How it works
 
-1. Executa o script de análise: `node ${CLAUDE_PLUGIN_ROOT}/hooks/generate-tokens.js`
-2. O script analisa arquivos CSS, SCSS, TSX, JSX, Vue, Svelte
-3. Extrai automaticamente:
-   - **Spacing**: valores de padding, margin, gap
+1. Run the analysis script: `node ${CLAUDE_PLUGIN_ROOT}/hooks/generate-tokens.js`
+2. The script scans CSS, SCSS, TSX, JSX, Vue, Svelte files
+3. Automatically extracts:
+   - **Spacing**: padding, margin, gap values
    - **Colors**: hex, rgb, hsl
    - **Shadows**: box-shadow
-   - **Border Radius**: valores de border-radius
-   - **Font Sizes**: tamanhos de fonte
-4. Detecta base de spacing (4px, 8px, ou 10px)
-5. Gera escala de spacing sugerida
+   - **Border Radius**: border-radius values
+   - **Font Sizes**: typography scale
+4. Detects spacing base (4px, 8px, or 10px)
+5. Generates a suggested spacing scale
 
 ## Output Formats
 
-- **CSS** (padrão): Variáveis CSS em `:root`
-- **JS/TS**: Export de objeto JavaScript
-- **JSON**: Dados brutos
+- **CSS** (default): CSS custom properties in `:root`
+- **JS/TS**: JavaScript object export
+- **Tailwind**: Tailwind config extension
+- **Figma**: tokens.studio compatible format
+- **JSON**: Raw data
 
-## Exemplo de uso
+## Usage
 
 ```bash
-# Gerar tokens CSS
+# Generate CSS tokens
 node ${CLAUDE_PLUGIN_ROOT}/hooks/generate-tokens.js . css
 
-# Gerar tokens JavaScript
+# Generate JavaScript tokens
 node ${CLAUDE_PLUGIN_ROOT}/hooks/generate-tokens.js . js
 
-# Gerar JSON
+# Generate Tailwind config
+node ${CLAUDE_PLUGIN_ROOT}/hooks/generate-tokens.js . tailwind
+
+# Generate Figma tokens
+node ${CLAUDE_PLUGIN_ROOT}/hooks/generate-tokens.js . figma
+
+# Generate JSON
 node ${CLAUDE_PLUGIN_ROOT}/hooks/generate-tokens.js . json
 ```
 
-## Depois de gerar
+## After Generating
 
-1. Revise os tokens gerados
-2. Pergunte ao usuário onde salvar:
+1. Review the generated tokens
+2. Ask the user where to save:
    - `src/styles/tokens.css`
    - `src/design-tokens.js`
-   - Outro local preferido
-3. Ofereça refatorar código existente para usar os tokens
-4. Atualize `.frontforge/system.md` com os tokens
+   - `src/styles/tokens.ts`
+   - Another preferred location
+3. Offer to refactor existing code to use the tokens
+4. Update `.frontforge/system.md` with the tokens
 
-## Comunicação
+## Communication
 
-Seja direto e útil:
+Be direct and helpful:
 
 ```
-"Analisei 47 arquivos e encontrei:
-- 23 cores diferentes (sugiro reduzir para paleta de 8)
-- Base de spacing: 4px (82% dos valores seguem)
-- 5 shadows distintas
+"Analyzed 47 files and found:
+- 23 different colors (suggest reducing to a palette of 8)
+- Spacing base: 4px (82% conformance)
+- 5 distinct shadows
 
-Posso gerar arquivo de tokens CSS?"
+Shall I generate a CSS tokens file?"
 ```
 
-Sempre ofereça próximos passos após gerar os tokens.
+Always offer next steps after generating tokens.

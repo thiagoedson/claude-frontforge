@@ -1,6 +1,6 @@
 ---
 name: claude-frontforge:init
-description: Build UX with craft and consistency. For interface design (dashboards, apps, tools) — not marketing sites.
+description: Start building a UI or initialize the design system. Detects project context, suggests a design direction (Precision, Warmth, Boldness, Data, etc.), and establishes tokens and patterns for consistent development.
 ---
 
 ## Visual Activation
@@ -66,10 +66,10 @@ Use this to inform your suggestion, but apply your own judgment too.
 
 Lead with your recommendation, then confirm:
 ```
-"Detectei que é um projeto Next.js com foco em analytics (alta confiança).
-Sugiro Data & Analysis: grid de 4px, paleta otimizada para charts, densidade funcional."
+"Detected a Next.js project focused on analytics (high confidence).
+Suggesting Data & Analysis: 4px grid, chart-optimized palette, functional density."
 
-[AskUserQuestion: "Essa direção faz sentido?"]
+[AskUserQuestion: "Does that direction feel right?"]
 ```
 
 ## Flow

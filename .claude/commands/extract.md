@@ -1,6 +1,6 @@
 ---
 name: claude-frontforge:extract
-description: Extract design patterns from existing code to create a system.md file.
+description: Scan existing UI files to detect the spacing grid, radius scale, button and card patterns, and depth strategy already in use — then save everything to .frontforge/system.md. Ideal when inheriting or taking over an existing codebase.
 ---
 
 # claude-frontforge extract
