@@ -66,10 +66,10 @@ Use this to inform your suggestion, but apply your own judgment too.
 
 Lead with your recommendation, then confirm:
 ```
-"Detectei que é um projeto Next.js com foco em analytics (alta confiança).
-Sugiro Data & Analysis: grid de 4px, paleta otimizada para charts, densidade funcional."
+"Detected a Next.js project focused on analytics (high confidence).
+Suggesting Data & Analysis: 4px grid, chart-optimized palette, functional density."
 
-[AskUserQuestion: "Essa direção faz sentido?"]
+[AskUserQuestion: "Does that direction feel right?"]
 ```
 
 ## Flow

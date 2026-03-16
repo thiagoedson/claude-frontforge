@@ -10,8 +10,9 @@ Check existing code against your design system.
 ## Usage
 
 ```
-/audit <path>     # Audit specific file/directory
-/audit            # Audit common UI paths
+/audit <path>        # Audit specific file/directory
+/audit               # Audit common UI paths
+/audit <path> --fix  # Auto-fix violations where safe
 ```
 
 ## What to Check
@@ -60,6 +61,28 @@ Create a system first:
 2. Run /extract → create system from existing code
 ```
 
+## Auto-Fix Mode
+
+When `--fix` is passed, automatically correct safe violations:
+
+**Safe to auto-fix:**
+- Spacing snapped to nearest grid value (e.g., 14px → 12px or 16px)
+- Shadow replaced with border when system is borders-only
+
+**Requires confirmation:**
+- Color changes (palette drift)
+- Pattern deviations (height/padding changes to components)
+
+Always show a diff preview and ask for confirmation before applying fixes:
+```
+Ready to fix 3 violations:
+  Button.tsx:12 — 38px → 36px (pattern)
+  Card.tsx:8    — shadow → border (depth)
+  Input.tsx:20  — 14px → 16px (grid)
+
+Apply these changes? (y/n/review each)
+```
+
 ## Implementation
 
 1. Check for system.md
@@ -67,3 +90,4 @@ Create a system first:
 3. Read target files (tsx, jsx, css, scss)
 4. Compare against rules
 5. Report violations with suggestions
+6. If `--fix`: collect safe fixes, preview diff, apply on confirmation

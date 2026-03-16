@@ -30,6 +30,20 @@ This helps users clearly identify that the Frontforge skill is engaged and ready
 
 **Not for:** Landing pages, marketing sites, campaigns. Redirect those to `/frontend-design`.
 
+## When This Skill Activates
+
+Auto-activate when the user asks to:
+- Build a UI component, screen, or layout for an app
+- Design a dashboard, admin panel, settings page, or data table
+- Create a design system, token file, or theme
+- Audit or fix UI inconsistencies
+- Build anything described as a "tool", "app", "platform", or "product"
+
+Do NOT activate for:
+- Landing pages, hero sections, marketing copy
+- Purely backend or API work
+- Data science, notebooks, or ML tasks
+
 ---
 
 # Before Writing Code
@@ -181,32 +195,6 @@ Read `.frontforge/system.md` and apply. Decisions are made.
 
 ---
 
-# Specialized Agents
-
-Use these agents for focused tasks:
-
-## UX Interpreter
-Extract design systems from live websites. Use for competitive analysis or inspiration.
-```
-/claude-frontforge:analyze-website <url>
-```
-
-## Component Architect
-Design scalable, accessible UI components following design system principles.
-
-## Animation Specialist
-Create purposeful micro-interactions. Respects `prefers-reduced-motion`.
-
-## Responsive Expert
-Mobile-first layouts that work across all viewports.
-
-## UX Researcher
-Create personas, analyze flows, provide evidence-based recommendations.
-
-See `agents/` directory for detailed guidelines.
-
----
-
 # Export Formats
 
 Generate design tokens in multiple formats:
@@ -230,15 +218,24 @@ node hooks/generate-tokens.js . json
 
 ---
 
+# Specialized Agents
+
+| Agent | Use for |
+|-------|---------|
+| `agents/ux-interpreter.md` | Extract design system from live websites |
+| `agents/component-architect.md` | Design scalable, accessible components |
+| `agents/animation-specialist.md` | Purposeful micro-interactions |
+| `agents/responsive-expert.md` | Mobile-first layouts across all viewports |
+| `agents/ux-researcher.md` | Personas, flows, evidence-based UX |
+| `agents/token-architect.md` | Token naming, color scales, semantic aliases |
+
 # Deep Dives
 
 For more detail on specific topics:
 - `references/principles.md` — Code examples, specific values, dark mode
 - `references/directions.md` — The 6 design personalities
+- `references/colors.md` — Color system, scales, dark mode, contrast
 - `references/validation.md` — Memory management, when to update system.md
-- `agents/ux-interpreter.md` — Website analysis protocol
-- `agents/component-architect.md` — Component design patterns
-- `agents/animation-specialist.md` — Motion guidelines
 - `references/devices.md` — Breakpoints, touch vs mouse, viewport handling
 - `references/styles.md` — Component patterns, buttons, inputs, cards, navigation
 - `references/interactions.md` — Hover, focus, loading states, feedback, animations
@@ -248,8 +245,9 @@ For more detail on specific topics:
 # Commands
 
 - `/claude-frontforge:init` — Initialize design system
+- `/claude-frontforge:component <name>` — Build a UI component with variants, states, and tokens
 - `/claude-frontforge:status` — Current system state
-- `/claude-frontforge:audit` — Check code against system
+- `/claude-frontforge:audit [--fix]` — Check code against system (optionally auto-fix safe violations)
 - `/claude-frontforge:extract` — Extract patterns from code
 - `/claude-frontforge:generate-tokens` — Generate token files
 - `/claude-frontforge:analyze-website` — Extract tokens from live websites
