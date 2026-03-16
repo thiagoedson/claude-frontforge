@@ -1,6 +1,6 @@
 ---
 name: claude-frontforge
-description: This skill is for interface design — dashboards, admin panels, apps, tools, and interactive products. NOT for marketing design (landing pages, marketing sites, campaigns).
+description: Build UI interfaces with craft and consistency — dashboards, admin panels, SaaS apps, and tools. Includes component building, design system creation, token generation, UI auditing, and pattern extraction. Use when building or improving any app interface.
 ---
 
 # Claude Frontforge
