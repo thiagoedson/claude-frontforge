@@ -1,6 +1,6 @@
 ---
 name: claude-frontforge:component
-description: Build a single UI component following the established design system. Handles variants, states, accessibility, and token usage.
+description: Build a UI component (Button, Card, Modal, Input, Table, Dropdown, etc.) with all variants, interactive states (hover, focus, disabled, loading), accessibility attributes, and design token references — consistent with the project's established design system.
 ---
 
 # claude-frontforge component

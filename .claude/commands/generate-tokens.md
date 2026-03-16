@@ -1,6 +1,6 @@
 ---
 name: claude-frontforge:generate-tokens
-description: Analyze existing code and automatically generate design tokens (spacing, colors, shadows, etc.)
+description: Generate a design token file by scanning your codebase for spacing, color, shadow, and radius patterns. Outputs CSS custom properties, Tailwind config, JS/TS object, or Figma tokens (tokens.studio format).
 ---
 
 Analyze existing code to generate design tokens for the project.

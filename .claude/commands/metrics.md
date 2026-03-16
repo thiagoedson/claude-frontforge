@@ -1,86 +1,86 @@
 ---
 name: claude-frontforge:metrics
-description: Exibe dashboard com métricas de saúde do design system (consistência, conformidade, qualidade)
+description: Show design system health metrics: spacing grid conformance %, color palette usage %, depth strategy consistency, and animation quality. Generates a 0-100 score with specific improvement suggestions.
 ---
 
-Gera relatório completo de saúde do design system do projeto.
+Generate a full health report for the project's design system.
 
-## Como funciona
+## How it works
 
-1. Lê `.frontforge/system.md` para entender as regras estabelecidas
-2. Analisa todos os arquivos UI do projeto (TSX, JSX, Vue, Svelte, CSS, SCSS)
-3. Calcula métricas de conformidade em 4 áreas:
-   - **Spacing**: % de valores que seguem o grid
-   - **Colors**: % de uso da paleta definida
-   - **Depth**: Conformidade com estratégia (borders/shadows)
-   - **Animation**: Qualidade das animações (sem bounce, duração adequada)
-4. Gera score geral de 0-100
-5. Fornece sugestões de melhorias
+1. Reads `.frontforge/system.md` to understand the established rules
+2. Scans all UI files in the project (TSX, JSX, Vue, Svelte, CSS, SCSS)
+3. Calculates conformance metrics across 4 areas:
+   - **Spacing**: % of values that follow the defined grid
+   - **Colors**: % of usage within the defined palette
+   - **Depth**: Conformance with the chosen strategy (borders/shadows)
+   - **Animation**: Quality of transitions (no bounce, appropriate duration)
+4. Generates an overall score from 0–100
+5. Provides specific improvement suggestions
 
-## Execução
+## Running
 
 ```bash
 node ${CLAUDE_PLUGIN_ROOT}/hooks/metrics-dashboard.js
 ```
 
-## Exemplo de output
+## Example output
 
 ```
 ╔════════════════════════════════════════════════════════════════╗
-║          DASHBOARD DE MÉTRICAS DO DESIGN SYSTEM                ║
+║              DESIGN SYSTEM HEALTH DASHBOARD                    ║
 ╚════════════════════════════════════════════════════════════════╝
 
-📊 SCORE GERAL: 87/100 ████████░░
-   🎯 Muito bom! Pequenas melhorias necessárias
+📊 OVERALL SCORE: 87/100 ████████░░
+   🎯 Very good! Minor improvements needed
 
 ─────────────────────────────────────────────────────────────────
 
-📏 CONSISTÊNCIA DE SPACING: 92% █████████░
-   156/170 valores no grid
-   ⚠️  Valores fora do grid: 6, 10, 14, 18px
+📏 SPACING CONSISTENCY: 92% █████████░
+   156/170 values on grid
+   ⚠️  Off-grid values: 6, 10, 14, 18px
 
-🎨 USO DA PALETA DE CORES: 78% ███████░░░
-   12 cores em uso (paleta define 8)
-   ⚠️  4 cores fora da paleta
+🎨 COLOR PALETTE USAGE: 78% ███████░░░
+   12 colors in use (palette defines 8)
+   ⚠️  4 colors outside the palette
 
-🎭 ESTRATÉGIA DE PROFUNDIDADE: 100% ██████████
-   Estratégia: subtle-shadows
+🎭 DEPTH STRATEGY: 100% ██████████
+   Strategy: subtle-shadows
    Shadows: 12 | Borders: 8
 
-⚡ ANIMAÇÕES: 85% ████████░░
-   23 transições encontradas
-   Duração média: 180ms
-   ⚠️  2 animações lentas (>300ms)
+⚡ ANIMATIONS: 85% ████████░░
+   23 transitions found
+   Average duration: 180ms
+   ⚠️  2 slow animations (>300ms)
 
 ─────────────────────────────────────────────────────────────────
 
-💡 SUGESTÕES:
+💡 SUGGESTIONS:
 
-1. Padronizar spacing: 14 valores fora do grid detectados
-2. Consolidar paleta de cores: 4 cores fora da paleta
-3. Otimizar duração de animações (2 animações >300ms)
+1. Standardize spacing: 14 off-grid values detected
+2. Consolidate color palette: 4 colors outside the palette
+3. Optimize animation duration (2 animations >300ms)
 ```
 
-## Quando usar
+## When to use
 
-- Após implementar features para verificar conformidade
-- Antes de fazer code review
-- Periodicamente para manter qualidade
-- Após refatorações grandes
+- After implementing features to verify conformance
+- Before code review
+- Periodically to maintain quality
+- After large refactors
 
-## Comunicação
+## Communication
 
-Seja direto ao apresentar o dashboard:
+Be direct when presenting the dashboard:
 
 ```
-"Analisei 127 arquivos. Score geral: 87/100
+"Analyzed 127 files. Overall score: 87/100
 
-Principais pontos:
-✅ Spacing consistente (92%)
-⚠️  Paleta de cores precisa consolidação (78%)
-✅ Estratégia de profundidade perfeita
+Key findings:
+✅ Spacing consistent (92%)
+⚠️  Color palette needs consolidation (78%)
+✅ Depth strategy perfect
 
-Quer que eu corrija as 4 cores fora da paleta?"
+Want me to fix the 4 out-of-palette colors?"
 ```
 
-Sempre ofereça ações concretas baseado nas métricas.
+Always offer concrete actions based on the metrics.

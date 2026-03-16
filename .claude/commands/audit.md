@@ -1,6 +1,6 @@
 ---
 name: claude-frontforge:audit
-description: Check existing code against your design system for spacing, depth, color, and pattern violations.
+description: Find UI inconsistencies in your code — off-grid spacing, wrong depth strategy, out-of-palette colors, and component drift from established patterns. Reports violations with file and line numbers. Add --fix to auto-correct safe issues.
 ---
 
 # claude-frontforge audit

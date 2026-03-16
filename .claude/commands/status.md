@@ -1,6 +1,6 @@
 ---
 name: claude-frontforge:status
-description: Show current design system state including direction, tokens, and patterns.
+description: Display the active design system for this project: design direction, spacing base, depth strategy, color tokens, and saved component patterns. Use to check what's been established before building.
 ---
 
 # claude-frontforge status

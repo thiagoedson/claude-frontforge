@@ -1,6 +1,6 @@
 ---
 name: claude-frontforge:banner
-description: Display the Frontforge visual banner to indicate the skill is active.
+description: Show the Frontforge activation banner (full, compact, or status indicator). Displayed automatically by other commands — use directly to verify the skill is installed and active, or to show available commands and agents.
 ---
 
 # claude-frontforge banner

@@ -1,6 +1,6 @@
 ---
 name: claude-frontforge:init
-description: Build UX with craft and consistency. For interface design (dashboards, apps, tools) — not marketing sites.
+description: Start building a UI or initialize the design system. Detects project context, suggests a design direction (Precision, Warmth, Boldness, Data, etc.), and establishes tokens and patterns for consistent development.
 ---
 
 ## Visual Activation

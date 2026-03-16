@@ -1,6 +1,6 @@
 ---
 name: claude-frontforge:analyze-website
-description: Extract design tokens and patterns from live websites using vision analysis to create build-ready blueprints.
+description: Copy any website's design system — give a URL and get back its colors, typography scale, spacing grid, shadows, and layout patterns with confidence scores. Outputs CSS variables, Tailwind config, or Figma tokens ready to use.
 ---
 
 # claude-frontforge analyze-website
