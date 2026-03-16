@@ -201,11 +201,66 @@ function downloadScripts() {
   console.log('✅ Scripts baixados em ./frontforge/\n');
 }
 
+// Registra hook no .claude/settings.json do projeto (Claude Code)
+function registerClaudeHook() {
+  const claudeDir = path.join(process.cwd(), '.claude');
+  const settingsPath = path.join(claudeDir, 'settings.json');
+
+  if (!fs.existsSync(claudeDir)) {
+    fs.mkdirSync(claudeDir, { recursive: true });
+  }
+
+  // Lê settings.json existente ou inicia objeto vazio
+  let settings = {};
+  if (fs.existsSync(settingsPath)) {
+    try {
+      settings = JSON.parse(fs.readFileSync(settingsPath, 'utf8'));
+    } catch {
+      console.log('   ⚠️  .claude/settings.json inválido, recriando...');
+    }
+  }
+
+  // Define o hook a ser registrado
+  const hookEntry = {
+    matcher: 'Write|Edit',
+    hooks: [
+      {
+        type: 'command',
+        command: 'node frontforge/validate-frontforge.js',
+        timeout: 30
+      }
+    ]
+  };
+
+  // Garante que a estrutura de hooks existe
+  if (!settings.hooks) settings.hooks = {};
+  if (!settings.hooks.PostToolUse) settings.hooks.PostToolUse = [];
+
+  // Evita duplicar o hook se já estiver registrado
+  const alreadyRegistered = settings.hooks.PostToolUse.some(
+    entry => entry.hooks && entry.hooks.some(h => h.command && h.command.includes('validate-frontforge'))
+  );
+
+  if (alreadyRegistered) {
+    console.log('   ℹ️  Hook já registrado em .claude/settings.json');
+    return;
+  }
+
+  settings.hooks.PostToolUse.push(hookEntry);
+  fs.writeFileSync(settingsPath, JSON.stringify(settings, null, 2));
+  console.log('✅ Hook registrado em .claude/settings.json');
+  console.log('   PostToolUse → validate-frontforge.js roda após cada Write/Edit\n');
+}
+
 // Configura para LLM específico
 function configureForLLM(llm) {
   console.log(`⚙️  Configurando para ${llm}...\n`);
 
   switch (llm) {
+    case 'claude':
+      registerClaudeHook();
+      break;
+
     case 'copilot':
       const githubDir = path.join(process.cwd(), '.github');
       if (!fs.existsSync(githubDir)) {
@@ -251,21 +306,23 @@ function promptUser() {
   });
 
   console.log('Escolha seu LLM:\n');
-  console.log('1) GitHub Copilot');
-  console.log('2) Cursor');
-  console.log('3) Aider');
-  console.log('4) Gemini CLI');
-  console.log('5) Outro (instruções genéricas)\n');
+  console.log('1) Claude Code');
+  console.log('2) GitHub Copilot');
+  console.log('3) Cursor');
+  console.log('4) Aider');
+  console.log('5) Gemini CLI');
+  console.log('6) Outro (instruções genéricas)\n');
 
-  readline.question('Sua escolha (1-5): ', (answer) => {
+  readline.question('Sua escolha (1-6): ', (answer) => {
     readline.close();
 
     const choices = {
-      '1': 'copilot',
-      '2': 'cursor',
-      '3': 'aider',
-      '4': 'gemini',
-      '5': 'generic'
+      '1': 'claude',
+      '2': 'copilot',
+      '3': 'cursor',
+      '4': 'aider',
+      '5': 'gemini',
+      '6': 'generic'
     };
 
     const llm = choices[answer];
@@ -300,7 +357,14 @@ function showNextSteps(llm) {
   console.log('3. Veja métricas do projeto:');
   console.log('   node frontforge/metrics-dashboard.js\n');
 
-  if (llm === 'copilot') {
+  if (llm === 'claude') {
+    console.log('4. Hook registrado em .claude/settings.json');
+    console.log('   validate-frontforge.js roda automaticamente após cada Write/Edit\n');
+    console.log('5. Use os comandos do skill:');
+    console.log('   /claude-frontforge:init        → inicializa sistema de design');
+    console.log('   /claude-frontforge:audit        → verifica violações');
+    console.log('   /claude-frontforge:generate-tokens → gera arquivo de tokens\n');
+  } else if (llm === 'copilot') {
     console.log('4. As regras já estão em .github/copilot-instructions.md');
     console.log('   Copilot vai seguir automaticamente!\n');
   } else if (llm === 'cursor') {
@@ -324,6 +388,7 @@ if (require.main === module) {
   if (args.includes('--help') || args.includes('-h')) {
     console.log('Uso:');
     console.log('  npx claude-frontforge-install       # Instalação interativa');
+    console.log('  npx claude-frontforge-install --llm claude');
     console.log('  npx claude-frontforge-install --llm copilot');
     console.log('  npx claude-frontforge-install --llm cursor');
     console.log('  npx claude-frontforge-install --llm aider');
@@ -347,7 +412,7 @@ if (require.main === module) {
     if (detectedLLMs.length === 1) {
       console.log(`✨ Detectado: ${detectedLLMs[0]}\n`);
       downloadScripts();
-      configureForLLM(detectedLLMs[0]);
+      if (detectedLLMs[0] !== 'generic') configureForLLM(detectedLLMs[0]);
       showNextSteps(detectedLLMs[0]);
     } else if (detectedLLMs.length > 1) {
       console.log(`✨ Detectados: ${detectedLLMs.join(', ')}\n`);
